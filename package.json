@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A static Progressive Web App (PWA) for 2D layout editing.",
   "scripts": {
-    "start": "serve public",
+    "start": "serve docs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
