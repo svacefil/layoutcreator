@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LayoutVibe - Editor (Pohyb Šipkami, Přichytávání)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4F46E5">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior: none;
+        }
+        #drawingCanvas {
+            touch-action: none;
+            background-color: #fff;
+        }
+        .control-button {
+            @apply px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all duration-150 ease-in-out transform active:scale-95;
+            min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-button i {
+            margin-right: 0.5rem;
+        }
+        /* The old modal styles have been removed as they are no longer needed. */
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col h-screen overflow-hidden">
+
+<header class="bg-indigo-700 text-white p-3 shadow-lg flex items-center justify-between flex-wrap">
+    <h1 class="text-2xl font-bold">LayoutVibe <i class="fas fa-drafting-compass"></i></h1>
+    <div class="flex space-x-1 sm:space-x-2 items-center flex-wrap">
+        <button id="newLayoutBtn" title="Nový půdorys" class="control-button"><i class="fas fa-file"></i> <span class="hidden sm:inline">Nový</span></button>
+        <button id="saveBtn" title="Uložit do LocalStorage" class="control-button"><i class="fas fa-save"></i> <span class="hidden sm:inline">Uložit</span></button>
+        <button id="loadBtn" title="Načíst z LocalStorage" class="control-button"><i class="fas fa-folder-open"></i> <span class="hidden sm:inline">Načíst</span></button>
+        <label for="importJsonFile" class="control-button cursor-pointer" title="Importovat JSON">
+            <i class="fas fa-upload"></i> <span class="hidden sm:inline">Import</span>
+        </label>
+        <input type="file" id="importJsonFile" class="hidden" accept=".json">
+        <button id="exportJsonBtn" title="Exportovat JSON" class="control-button"><i class="fas fa-download"></i> <span class="hidden sm:inline">Export</span></button>
+        <button id="undoBtn" title="Zpět (Ctrl+Z)" class="control-button"><i class="fas fa-undo"></i></button>
+        <button id="redoBtn" title="Vpřed (Ctrl+Y)" class="control-button"><i class="fas fa-redo"></i></button>
+        <button id="zoomInBtn" title="Přiblížit (+)" class="control-button"><i class="fas fa-search-plus"></i></button>
+        <button id="zoomOutBtn" title="Oddálit (-)" class="control-button"><i class="fas fa-search-minus"></i></button>
+        <button id="resetViewBtn" title="Resetovat pohled (0,0)" class="control-button"><i class="fas fa-home"></i></button>
+        <button id="helpBtn" title="Nápověda (Video)" class="control-button"><i class="fas fa-question-circle"></i></button>
+        <span id="onlineStatus" class="ml-1 sm:ml-3 p-2 rounded-md text-sm"></span>
+    </div>
+</header>
+
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden p-2 md:p-4 gap-2 md:gap-4">
+    <section class="flex-1 bg-gray-200 shadow-md rounded-lg overflow-hidden p-1 md:p-2 flex justify-center items-center relative">
+        <canvas id="drawingCanvas" class="rounded-md border border-gray-400" tabindex="0"></canvas></section>
+
+    <aside class="w-full md:w-72 lg:w-80 bg-white p-4 shadow-md rounded-lg overflow-y-auto">
+        <h2 class="text-xl font-semibold mb-4 border-b pb-2">Vlastnosti Objektu</h2>
+        <div id="propertyInspectorContent" class="space-y-4">
+            <p class="text-gray-500">Vyberte objekt nebo nakreslete nový. Použijte Ctrl+C/V pro kopírování/vkládání. Šipkami posouvejte vybraný objekt.</p>
+        </div>
+        <div id="selectedShapeForm" class="hidden space-y-3">
+            <div>
+                <label for="shapeId" class="block text-sm font-medium text-gray-700">ID Objektu:</label>
+                <input type="text" id="shapeId" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Např. Room1">
+            </div>
+            <div>
+                <label for="shapeType" class="block text-sm font-medium text-gray-700">Typ Oblasti:</label>
+                <select id="shapeType" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="active">Aktivní (Active)</option>
+                    <option value="dead">Mrtvá Zóna (Dead)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Pozice & Rozměry (Světové souř.):</label>
+                <p id="shapeDimensions" class="mt-1 text-sm text-gray-600 bg-gray-50 p-2 rounded-md"></p>
+            </div>
+            <button id="deleteShapeBtn" title="Smazat (Delete/Backspace)" class="w-full control-button bg-red-600 hover:bg-red-700 focus:ring-red-500"><i class="fas fa-trash-alt"></i> Smazat Objekt</button>
+        </div>
+    </aside>
+</main>
+
+<footer class="bg-gray-200 text-gray-700 p-2 text-center text-sm border-t">
+    LayoutVibe © 2025 | Stav: <span id="statusMessage">Připraveno</span> | Světové souřadnice: <span id="coordsMessage">X: -, Y: -</span> | Zoom: <span id="zoomLevelDisplay">100%</span>
+</footer>
+
+<div id="helpModal" class="hidden fixed inset-0 bg-black bg-opacity-90 flex flex-col justify-center items-center z-50 p-4 sm:p-8">
+    <button id="closeHelpModal" class="absolute top-4 right-4 sm:top-6 sm:right-8 text-white text-5xl font-light hover:text-gray-300 transition-colors z-[51]">×</button>
+
+    <div class="w-full max-w-5xl flex flex-col items-center">
+        <!-- Video Player -->
+        <div class="w-full shadow-2xl mb-6">
+            <video id="helpVideo" class="w-full h-auto aspect-video rounded-lg bg-black" controls poster="https://placehold.co/1280x720/1a202c/a0aec0?text=Video+N%C3%A1pov%C4%9Bda">
+                <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+                Váš prohlížeč nepodporuje HTML5 video.
+            </video>
+        </div>
+
+        <!-- Help Text / Keyboard Shortcuts -->
+        <div class="text-center text-gray-300">
+            <h3 class="text-2xl font-semibold mb-4 text-white">Jak používat LayoutVibe</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 text-base text-gray-400">
+                <p><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">LMB</kbd> - Kreslit, vybrat, přesunout</p>
+                <p><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Kolečko</kbd> - Zoom</p>
+                <p><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Šipky</kbd> - Posunout objekt</p>
+                <p><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+C/V</kbd> - Kopírovat/Vložit</p>
+                <p><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Z/Y</kbd> - Zpět/Vpřed</p>
+                <p><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Delete</kbd> - Smazat objekt</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

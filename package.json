@@ -1,0 +1,20 @@
+{
+  "name": "layoutcreator",
+  "version": "1.0.0",
+  "description": "A static Progressive Web App (PWA) for 2D layout editing.",
+  "scripts": {
+    "start": "serve public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pwa",
+    "editor",
+    "layout",
+    "static"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
