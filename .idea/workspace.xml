@@ -6,24 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8552bb-0153-4e8f-9b7f-2b601e4c6613" name="Changes" comment="add rectangle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/help-video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/video-poster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/all.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/tailwind.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/baseshape.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/canvasDrawingUtils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/dataManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/interactionManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/rectangle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/uuid.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webfonts/fa-brands-400.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webfonts/fa-regular-400.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webfonts/fa-solid-900.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/sw.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +17,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;svacefil&quot;
+  }
+}</component>
   <component name="GitRewordedCommitMessages">
     <option name="commitMessagesMapping">
       <RewordedCommitMessageMapping>
@@ -43,12 +33,12 @@
     <option name="currentCommit" value="1" />
     <option name="onto" value="3986f8c48725fe4672badfb334a0eb09df4150ce" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/svacefil/layoutcreator.git",
-    "accountId": "00016b1e-6614-432a-9fe3-4182a84d491a"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/svacefil/layoutcreator.git&quot;,
+    &quot;accountId&quot;: &quot;00016b1e-6614-432a-9fe3-4182a84d491a&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>

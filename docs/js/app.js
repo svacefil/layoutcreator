@@ -21,7 +21,7 @@ export class App {
             currentRect: {}
         };
         this.copiedShapeData = null;
-        this.currentlyHighlightedSvgType = null; // Pro sledování, co je zvýrazněno
+        this.currentlyHighlightedSvgType = null;
 
         const uuidGen = new UUIDGenerator();
         this.dataManager = new DataManager(uuidGen);
@@ -184,7 +184,6 @@ export class App {
     }
 
     drawAll() {
-        // Při běžném překreslování resetujeme stav zvýraznění
         if (this.currentlyHighlightedSvgType) {
             this.currentlyHighlightedSvgType = null;
         }
