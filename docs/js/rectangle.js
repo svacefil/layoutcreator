@@ -1,4 +1,4 @@
-import { BaseShape } from './baseShape.js';
+import { BaseShape } from './baseshape.js';
 
 export class Rectangle extends BaseShape {
     static minShapeSize = 2;
