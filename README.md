@@ -2,6 +2,30 @@
 
 LayoutVibe is a simple 2D layout editor designed for creating and manipulating rectangular areas. It functions as a Progressive Web App (PWA), enabling offline use. The editor provides an intuitive interface for drawing, modifying, and managing layouts, which can be saved, loaded, and exported.
 
+## Project Requirements Fulfillment
+
+| Kategorie | Popis | Splněno | Způsob splnění a odůvodnění |
+| :--- | :--- | :---: | :--- |
+| **Dokumentace** | Cíl projektu, postup, popis funkčnosti, komentáře ve zdrojovém kódu | Ano | Tento `README.md` soubor popisuje cíl, funkčnost a strukturu projektu. Zdrojové kódy jsou rozděleny do logických modulů a tříd, což usnadňuje orientaci. |
+| **HTML 5** | Validní použití HTML5 doctype a fungující v moderních prohlížečích | Ano | Soubor `index.html` začíná deklarací `<!DOCTYPE html>` a aplikace je testována pro moderní prohlížeče. |
+| **HTML 5** | Správné použití sémantických značek | Ano | Aplikace používá sémantické značky pro strukturování obsahu, jako jsou `<header>`, `<main>`, `<aside>`, a `<footer>`. |
+| **HTML 5** | Grafika - SVG / Canvas | Ano | Aplikace využívá `<canvas>` pro kreslení a interakci s objekty. Dále dynamicky generuje SVG (`createSvgSummary` v `dataManager.js`) pro zobrazení souhrnu objektů. |
+| **HTML 5** | Média - Audio/Video | Ano | V nápovědě je použit prvek `<video>` pro přehrání instruktážního videa. |
+| **HTML 5** | Formulářové prvky (Validace, typy, placeholder, atd.) | Ano | Využívají se formulářové prvky jako `<input type="text">`, `<input type="file">`, `<select>` a `<button>` pro interakci s uživatelem. Validace je řešena v JS (např. unikátnost ID v `_handleShapeIdChange` v `app.js`). |
+| **HTML 5** | Offline aplikace | Ano | Aplikace je navržena jako PWA s `manifest.json` a registruje `service worker` (`main.js`) pro offline funkčnost. |
+| **CSS** | Pokročilé selektory | Ano | V `index.html` se prostřednictvím Tailwind CSS používají pseudotřídy a kombinátory jako `:hover` a `active:`. |
+| **CSS** | CSS3 transitions/animations | Ano | Tlačítka a další UI prvky využívají CSS přechody a transformace pro plynulé vizuální efekty při interakci (např. `transition-all`, `active:scale-95`). |
+| **CSS** | Media queries | Ano | Rozhraní je responzivní díky použití breakpointů Tailwind CSS (např. `md:`, `sm:`, `lg:`), které zajišťují funkčnost na mobilních zařízeních i na desktopu. |
+| **Javascript** | OOP přístup (prototypová dědičnost, jmenné prostory) | Ano | Celá aplikace je postavena na objektově orientovaném přístupu s využitím ES6 tříd (`App`, `InteractionManager`, `Rectangle`, `BaseShape`), které fungují na bázi prototypové dědičnosti. |
+| **Javascript** | Použití JS frameworku či knihovny | Ano | Projekt využívá knihovnu **Tailwind CSS** pro stylování a **Font Awesome** pro ikony, což je deklarováno v `index.html`. |
+| **Javascript** | Použití pokročilých JS API | Ano | Projekt aktivně využívá: **File API** (`FileReader` v `importFromFile` v `dataManager.js`), **Drag & Drop** (implementováno manuálně přes pointer události v `interactionManager.js`), a **LocalStorage API** (`localStorage.setItem` a `getItem` v `dataManager.js`). |
+| **Javascript** | Funkční historie (History API) | Ano | Aplikace využívá **History API** (`window.history.pushState`, `replaceState`, a `popstate` event) pro ukládání a obnovování stavu, což umožňuje použití tlačítek zpět/vpřed v prohlížeči pro undo/redo (`_saveHistoryState`, `_restoreShapesFromState` v `app.js`). |
+| **Javascript** | Ovládání médií | Ano | Aplikace ovládá přehrávání videa v modálním okně nápovědy – pozastaví video při zavření okna (`_closeHelpModal` v `app.js`). |
+| **Javascript** | Offline aplikace (využití JS API pro zjišťování stavu) | Ano | Aplikace detekuje stav online/offline pomocí `navigator.onLine` a posluchačů událostí `online` a `offline` pro aktualizaci UI (`_updateOnlineStatus` v `app.js`). |
+| **Javascript** | JS práce se SVG | Ano | Třída `DataManager` dynamicky vytváří a upravuje SVG elementy (`createElementNS`) pro zobrazení souhrnu tvarů a přidává na ně posluchače událostí (`createSvgSummary`, `_handleShowSvgSummary` v `app.js` a `dataManager.js`). |
+| **Ostatní** | Kompletnost řešení | Ano | Aplikace je funkční, samostatná a splňuje všechny popsané funkce od kreslení až po export. |
+| **Ostatní** | Estetické zpracování | Ano | Použitím Tailwind CSS je dosaženo moderního a responzivního designu s konzistentním vzhledem. |
+
 ## Features
 
 * **Canvas-based Editing**: A fully interactive canvas for all layout operations.
