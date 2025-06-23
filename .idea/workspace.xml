@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8552bb-0153-4e8f-9b7f-2b601e4c6613" name="Changes" comment="add rectangle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/js/rectangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/js/rectangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
